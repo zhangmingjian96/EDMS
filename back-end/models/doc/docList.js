@@ -26,6 +26,19 @@ const DocumentList=mongoose.model("DocumentList",docSchema);
     
 
   } 
+  const addDoc=(res)=>{
+   return new Promise(function(resolve,rejected){
+    DocumentList.insertMany(res,function(error){
+      try{
+        resolve(res);
+        console.log(123);
+      }catch{
+        console.log(error);
+      }
+    });
+   })
+    
+  }
 
 
-    module.exports=docList;
+    module.exports={docList,addDoc};

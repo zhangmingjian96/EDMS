@@ -12,6 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "art-template": "^4.13.2",
+    "moment": "^2.24.0",
+    "simditor": "^2.3.23",
     "sme-router": "^0.12.8",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.6"

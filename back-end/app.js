@@ -7,7 +7,7 @@ var config=require("./config");
 var {jsonFormat}=require("./middlewares/document");
 // var indexRouter = require('./routes/111');
 var indexRouter = require('./routes/index.js');
-
+var bodyParser=require("body-parser");
 var app = express();
 
 // view engine setup
@@ -18,6 +18,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(jsonFormat);
 // app.use('/', indexRouter);
