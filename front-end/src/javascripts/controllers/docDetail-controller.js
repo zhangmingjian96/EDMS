@@ -1,23 +1,24 @@
+const docDetail=require("../views/route/addDetail.html");
 const addDocument=require("../views/route/addDoc.html");
-const updateDoc=require("../models/addDoc");
 const editeDoc=require("../models/editeDoc");
-const documentList=require("../views/route/docList.html");
-let addData;
-const render=(req,res,next)=>{
-    res.render(addDocument);
+const updateDoc=require("../models/addDoc");
+const query=require("querystring");
+const render=async (req,res,next)=>{
+    console.log();
+   
+    let data=await editeDoc("/api/v1/document/edite",{theme:query.parse(req.params.theme.split(":")[1]).theme},"POST");
+    console.log(data);
+    res.render(template.compile(docDetail)({items:data[0]}));
+    
     $('#datepicker').date_input();
     var editor = new Simditor({
         textarea: $('#editor')
   
         });
-   
         clickEvent();
-        
 }
+async function clickEvent() {
 
- async function clickEvent() {
-    
-     
     $(".btn-primary").on("click",async function(e){
         e.preventDefault();
         theme=$("#theme").val();
@@ -37,4 +38,4 @@ const render=(req,res,next)=>{
     
  }  
 
-module.exports={render,addData};
+module.exports=render;

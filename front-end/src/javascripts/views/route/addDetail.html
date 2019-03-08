@@ -21,17 +21,18 @@
       <!-- form start -->
       <form role="form">
         <div class="box-body">
+            
           <div class="form-group">
             <label for="theme">主题</label>
-            <input type="text" class="form-control themes" id="theme" placeholder="文件主题">
+            <input type="text" class="form-control themes" id="theme"  value={{items.theme}}>
           </div>
           <div class="form-group">
             <label for="author">作者</label>
-            <input type="text" class="form-control authors" id="author" placeholder="请输入作者">
+            <input type="text" class="form-control authors" id="author" value={{items.author}}>
           </div>
           <div class="form-group">
             <label for="operator">上传</label>
-            <input type="text" class="form-control operators" id="operator" placeholder="请输入上传的人">
+            <input type="text" class="form-control operators" id="operator"  value={{items.operator}}>
           </div>
           <div class="form-group">
             <label>Date:</label>
@@ -40,12 +41,12 @@
               <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
               </div>
-              <input type="text" class="form-control pull-right" id="datepicker">
+              <input type="text" class="form-control pull-right" id="datepicker" value={{items.date}}>
             </div>
             <br>
             <div class="form-group">
               <label for="ei">内容概要</label>
-              <input type="text" class="form-control operators" id="cate" placeholder="请输入概要">
+              <input type="text" class="form-control operators" id="cate"  value={{items.description}}>
             </div>
             <br>
             
@@ -53,7 +54,7 @@
                 <label for="edite">详情</label>
                 <textarea id="editor"  autofocus></textarea>
               </div>
-            
+           
             <!-- /.input group -->
           </div>
           <!-- /.form group -->

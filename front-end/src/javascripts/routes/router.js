@@ -4,6 +4,8 @@ const appContentaddDoc=require("../views/route/addDoc.html");
 const appContent=require("../views/homePage/content-mini.html");
 const addDocRender=require("../controllers/addDoc-controller");
 const docListRender=require("../controllers/doclist-controller");
+const appContentDoc=require("../views/homePage/content-doc.html");
+const docDetailController=require("../controllers/docDetail-controller");
 const render=()=>{
     const router=new SMERouter.default("router-view");
     
@@ -12,11 +14,11 @@ const render=()=>{
         res.render(appContent);
     })
     router.route("/doc",(req,res,next)=>{
-        res.render(appContentDocList);
+        res.render(appContentDoc);
     })
-    router.route("/doc/addDoc",addDocRender)
+    router.route("/doc/addDoc",addDocRender.render)
     router.route("/doc/docList",docListRender)
-    
+    router.route("/doc/docdetail/:theme",docDetailController)
     router.route("/user",(req,res,next)=>{
         res.render(123);
     })

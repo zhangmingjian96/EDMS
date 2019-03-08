@@ -9,9 +9,16 @@
         const addedDocumentList=(req,res,next)=>{
             res.render("document",{status:res.status,data:JSON.stringify(res.documentList)});
         }
-
+        const deleteDocumentList=(req,res,next)=>{
+            res.render("document",{status:res.status,data:JSON.stringify(res.documentList)});
+        }
+        const editeDocumentList=(req,res,next)=>{
+            res.render("document",{status:res.status,data:JSON.stringify(res.documentList)});
+        }
         module.exports={
             jsonFormat,
             documentList,
             addedDocumentList,
+            deleteDocumentList,
+            editeDocumentList
         }

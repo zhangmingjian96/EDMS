@@ -22,7 +22,7 @@ const DocumentList=mongoose.model("DocumentList",docSchema);
 
   const docList=()=>{
     
-    return DocumentList.find({theme:"for the horde"}).exec();
+    return DocumentList.find({}).exec();
     
 
   } 
@@ -40,5 +40,27 @@ const DocumentList=mongoose.model("DocumentList",docSchema);
     
   }
 
+  const deleteDoc=(req)=>{
+    console.log(req);
+    return DocumentList.deleteMany(req,function(err){
+      try{
+        console.log(123);
+      }catch{
+        console.log(err);
+      }
+    })
+  }
+  const editeDoc=(req)=>{
+    console.log(req)
+    // return DocumentList.updateOne({theme:req},body,function(error){
+    //   try{
+    //     console.log(123);
+    //   }catch{
+    //     console.log(error);
+    //   }
+    // })
+    return DocumentList.find({theme:req}).exec();
+  }
 
-    module.exports={docList,addDoc};
+
+    module.exports={docList,addDoc,deleteDoc,editeDoc};

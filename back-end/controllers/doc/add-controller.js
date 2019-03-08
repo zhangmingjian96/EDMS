@@ -1,4 +1,4 @@
-const {addDoc,docList}=require("../../models/doc/docList.js");
+const {addDoc}=require("../../models/doc/docList.js");
 
 
 const addController=async (req,res,next)=>{
@@ -8,6 +8,7 @@ const addController=async (req,res,next)=>{
         
     }
     let data=await addDoc(req.body);
+    
     res.documentList=data;
     res.status=status;
     console.log(data);
