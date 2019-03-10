@@ -1,6 +1,6 @@
 const request=require("../utils.js/api")
-const getDocList=()=>{
-   return  request("/api/v1/document/doc")
+const getDocList=(url,data)=>{
+   return  request(url,data)
 }
 
 

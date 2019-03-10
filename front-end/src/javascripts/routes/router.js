@@ -10,10 +10,8 @@ const render=()=>{
     const router=new SMERouter.default("router-view");
     
 
-    router.route("/home",(req,res,next)=>{
-        res.render(appContent);
-    })
-    router.route("/doc",(req,res,next)=>{
+    
+    router.route("/document",(req,res,next)=>{
         res.render(appContentDoc);
     })
     router.route("/doc/addDoc",addDocRender.render)
@@ -30,6 +28,9 @@ const render=()=>{
     })
     router.route("/user/userLeave",(req,res,next)=>{
         res.render(1233);
+    })
+    router.route("/home",(req,res,next)=>{
+        res.render(appContent);
     })
     router.route("*",(req,res,next)=>{
         res.redirect("/home");

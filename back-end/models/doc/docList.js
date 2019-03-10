@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/document', {useNewUrlParser: true});
 
 let docSchema=new mongoose.Schema({
-  id:Number,
+  totalDescription:String,
   theme:String,
   author:String,
   operator:String,
@@ -19,12 +19,19 @@ const DocumentList=mongoose.model("DocumentList",docSchema);
 //   description:"zmj",
 
 // })
-
-  const docList=()=>{
+  const docCount=()=>{
+      return DocumentList.countDocuments(function(err,count){
+       
+      });
+  }
+  const docList=async (req)=>{
+    // let count=await docCount();
+    let count=await docCount();
+    let document=await DocumentList.find().limit(~~req.pageSize).skip((req.pageNum-1)*req.pageSize);
+    return new Promise((res,rej)=>{
+      res({count,document})
+    })
     
-    return DocumentList.find({}).exec();
-    
-
   } 
   const addDoc=(res)=>{
    return new Promise(function(resolve,rejected){
@@ -61,6 +68,16 @@ const DocumentList=mongoose.model("DocumentList",docSchema);
     // })
     return DocumentList.find({theme:req}).exec();
   }
+  const updateDoc=(req,body)=>{
+    console.log(req)
+    return DocumentList.updateOne({_id:req},body,function(error){
+      try{
+        console.log(123);
+      }catch{
+        console.log(error);
+      }
+    })
+  }
 
 
-    module.exports={docList,addDoc,deleteDoc,editeDoc};
+    module.exports={docList,addDoc,deleteDoc,editeDoc,updateDoc};

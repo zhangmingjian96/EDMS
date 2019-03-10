@@ -25,12 +25,12 @@ const render=(req,res,next)=>{
         operator=$("#operator").val();
         date=$("#datepicker").val();
         description=$("#cate").val();
-      
-        location.hash="#/doc/docList";
+        
         addData=await updateDoc("/api/v1/document/add",{
-         theme,author, operator,date,description 
+         theme,author, operator,date,description
         },"POST")
-       
+        console.log(addData);
+        location.hash="#/doc/docList";
        
         
     })

@@ -3,7 +3,7 @@ const addClick=()=>{
             console.log($(this).data("navname"),this);
         switch($(this).data("navname")){
             case "doc":
-            location.hash="#/doc"
+            location.hash="#/document"
             break;
             case "docList":
             location.hash="#/doc/docList"

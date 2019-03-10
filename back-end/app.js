@@ -4,9 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var config=require("./config");
-var {jsonFormat}=require("./middlewares/document");
+var {jsonFormat}=require("./middlewares/document.js");
 // var indexRouter = require('./routes/111');
 var indexRouter = require('./routes/index.js');
+var loginRouter = require('./routes/login.js');
 var bodyParser=require("body-parser");
 var app = express();
 
@@ -23,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(jsonFormat);
 // app.use('/', indexRouter);
 app.use(config.baseUrl+'/document', indexRouter);
-
+app.use(config.baseUrl+'/login', loginRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

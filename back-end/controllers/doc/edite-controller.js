@@ -8,10 +8,11 @@ const docController=async (req,res,next)=>{
         msg:"request is success",
         
     }
+    
     res.documentList=await editeDoc(req.body.theme) ? await editeDoc(req.body.theme) : res.documentList;
- 
-    res.status=status;
-        next();
+     res.status=status;
+   
+     next();
 }
 
 module.exports=docController;

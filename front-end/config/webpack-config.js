@@ -3,15 +3,27 @@
    const html_plugin=require("html-webpack-plugin");
     module.exports={
         mode:"none",
-        entry:'./src/javascripts/index.js',
+        entry:{
+            index:"./src/javascripts/index",
+            login:"./src/javascripts/login",
+        },
         output:{
-            filename:"index.js",
+            filename:"[name].js",
             path:path.join(__dirname,"../dev")},
-        plugins: [new copy_plugin([{
+        plugins: [
+            new copy_plugin([{
             from:"./src/static",to:"static"
-        }]), new html_plugin({
+        }]),
+         new html_plugin({
             template:"./src/index.html",
             filename:"index.html",
+            chunks:["index"],
+        }),
+
+        new html_plugin({
+            template:"./src/login.html",
+            filename:"login.html",
+            chunks:["login"],
         })
         ],
         devServer:{
