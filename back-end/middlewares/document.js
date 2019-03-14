@@ -1,3 +1,4 @@
+        
         const  jsonFormat=(req,res,next)=>{
             res.header("content-type","application/json;charset=utf8");
             next();
@@ -28,6 +29,9 @@
         const login=(req,res,next)=>{
             res.render("document",{status:res.status,data:JSON.stringify(res.oldUser)});
         }
+        const code=(req,res,next)=>{
+            res.render("document",{status:res.status,data:JSON.stringify(res.documentList)});
+        }
         module.exports={
             jsonFormat,
             documentList,
@@ -37,4 +41,5 @@
             updateDocumentList,
             register,
             login,
+            code,
         }

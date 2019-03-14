@@ -3,3 +3,24 @@
     text-decoration: underline;
     
 }
+
+.sort{
+    height: 18px;
+    background: rgb(238, 231, 231);
+    font-size: 18px;
+
+    border-radius: 5px;
+    
+    box-sizing: border-box;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+.sort:hover{
+    background: rgb(136, 136, 219);
+    color: white;
+}
+.sortActive{
+    background: rgb(136, 136, 219);
+    color: white;
+}

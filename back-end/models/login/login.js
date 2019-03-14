@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/login', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost:27017/document', {useNewUrlParser: true});
 
 let loginSchema=new mongoose.Schema({
   username:String,

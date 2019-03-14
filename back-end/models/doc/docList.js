@@ -19,15 +19,15 @@ const DocumentList=mongoose.model("DocumentList",docSchema);
 //   description:"zmj",
 
 // })
-  const docCount=()=>{
-      return DocumentList.countDocuments(function(err,count){
+  const docCount=(req)=>{
+      return DocumentList.countDocuments(req.searchTheme? {theme:{$regex:req.searchTheme}}:{},function(err,count){
        
       });
   }
   const docList=async (req)=>{
     // let count=await docCount();
-    let count=await docCount();
-    let document=await DocumentList.find().limit(~~req.pageSize).skip((req.pageNum-1)*req.pageSize);
+    let count=await docCount(req);
+    let document=await DocumentList.find(req.searchTheme? {theme:{$regex:req.searchTheme}}:{}).sort({_id:req._sort}).limit(~~req.pageSize).skip((req.pageNum-1)*req.pageSize);
     return new Promise((res,rej)=>{
       res({count,document})
     })
