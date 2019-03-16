@@ -67,7 +67,7 @@
                     window.location.href="index.html"
                 }else if(res.code===350){
                     alert("验证码错误")
-                }else{
+                }else if(res.code===351){
                     alert("账号不存在或密码错误")
                 }
                     

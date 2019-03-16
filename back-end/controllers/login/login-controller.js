@@ -8,7 +8,7 @@ let Decrypt = (encrypted) => {
     return decrypted;
 }
 const docController=async (req,res,next)=>{
-    console.log(Decrypt(req.cookies.mark),req.body);
+  
     let status={
         code:200,
         msg:"request is success",
@@ -23,15 +23,40 @@ const docController=async (req,res,next)=>{
          return;
     }
     let oldUser=await findUser({user:req.body.user,password:req.body.password});
- 
+        
     if(oldUser.length===0){
        
         res.status.code=351;
+    }
+    if(oldUser.length!==0){
+     
+        req.session.user={
+            user:oldUser[0]._id,
+            username:oldUser[0].username,
+            
+        }
+    
     }
     
     res.oldUser=oldUser;
     
      next();
 }
+const authController=(req,res,next)=>{
+    console.log(req.session.user)
+    if(req.session.user){
+    res.status={
+        code:200,
+        msg:"登陆成功"
+    }
+    }else{
+        res.status={
+            code:207,
+            msg:"请登录"
+        } 
+    }
+    res.oldUser=[];
+     next();
+}
 
-module.exports=docController;
+module.exports={docController,authController};

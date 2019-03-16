@@ -3,6 +3,7 @@ const documentList=require("../views/route/docList.html");
 const deleteDoc=require("../models/deleteDoc");
 const docListContent=require("../views/route/docListContent.html")
 let pageNum=1,pageSize=10;
+let sort;
 const render=(req,res,next)=>{
    
    res.render(template.compile(documentList)())
@@ -10,16 +11,16 @@ const render=(req,res,next)=>{
    renderList(req,res,next);
       
    
-   bindEvent(req,res,next);
+   
   
    
 }
- async function renderList(req,res,next,searchTheme){
-   let data=await docList("/api/v1/document/doc",{pageNum:pageNum,pageSize:pageSize,searchTheme:searchTheme});
-   console.log(data);
+ async function renderList(req,res,next,searchTheme,_sort){
+   let data=await docList("/api/v1/document/doc",{pageNum:pageNum,pageSize:pageSize,searchTheme:searchTheme?searchTheme:"",_sort:_sort});
+
    let count=data.count;
-   console.log(count)
    
+ 
    $(".box-content").html(template.compile(docListContent)({items:data.data}))
     
    $(".zxf_pagediv").createPage({
@@ -27,17 +28,19 @@ const render=(req,res,next)=>{
       current: pageNum,
       backfun: function(e) {
          pageNum=e.current;
-         renderList(req,res,next,searchTheme);
-         bindEvent(req,res,next);
+         renderList(req,res,next,searchTheme,sort);
+         
           //console.log(e);//回调
       }
   });
+  bindEvent(req,res,next);
 }
 
 function bindEvent(req,res,next){
    $("#deleteAndEdite span").on("click",function(){ 
+      console.log(123);
       let theme=($(this).parent().parent()).children()[1].textContent;
-         console.log(theme);
+        
       if($(this).text()==="删除"){
          $(this).parent().parent().remove();
          deleteDoc("/api/v1/document/delete",{theme:theme});
@@ -45,7 +48,7 @@ function bindEvent(req,res,next){
          
         
          location.hash="#/doc/docDetail/:"+"theme="+theme;
-         console.log($("#theme"))
+        
          // editeDoc("/api/v1/document/edite/"+theme,{theme:theme},"POST");
       }
       })
@@ -61,7 +64,7 @@ function bindEvent(req,res,next){
              backfun: function(e) {
                 pageNum=e.current;
                 renderList(req,res,next,searchTheme);
-                bindEvent(req,res,next);
+             
                  //console.log(e);//回调
              }
          });
@@ -71,9 +74,9 @@ function bindEvent(req,res,next){
          $(this).addClass("sortActive");
          $(this).siblings("span").removeClass("sortActive");
          let count;
-       
+         let searchTheme=$(".search-button").siblings().val(); 
          if(!($(this).text().indexOf("升序")+1)){
-            let sort=-1;
+            sort=-1;
             let data=await docList("/api/v1/document/doc",{pageNum:pageNum,pageSize:pageSize,_sort:sort});
          
             count=data.count;
@@ -81,7 +84,7 @@ function bindEvent(req,res,next){
             
             $(".box-content").html(template.compile(docListContent)({items:data.data}))
          }else{
-            let sort=1;
+            sort=1;
             let data=await docList("/api/v1/document/doc",{pageNum:pageNum,pageSize:pageSize,_sort:sort});
             count=data.count;
 
@@ -93,8 +96,10 @@ function bindEvent(req,res,next){
             current: pageNum,
             backfun: function(e) {
                pageNum=e.current;
-               renderList(req,res,next,searchTheme);
-               bindEvent(req,res,next);
+               console.log(e);
+               renderList(req,res,next,searchTheme,sort);
+         
+               
                 //console.log(e);//回调
             }
         })

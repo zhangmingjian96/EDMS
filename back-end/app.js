@@ -9,12 +9,20 @@ var {jsonFormat}=require("./middlewares/document.js");
 var indexRouter = require('./routes/index.js');
 var loginRouter = require('./routes/login.js');
 var bodyParser=require("body-parser");
+var session=require("express-session");
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+app.use(session({
+  secret: 'zhangmingjian',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { 
+    path: '/', httpOnly: true, secure: false, maxAge: 3000
+  }
+}))
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
