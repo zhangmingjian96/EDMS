@@ -7,6 +7,8 @@ const authLogin=async ()=>{
        console.log(123)
     appHomePageRender();
     routerRender(); 
+    console.log(res)
+    $(".name").text(res.data[0].username)
    }).catch((rej)=>{
     $.Toast("Warning","请登录后在操作","warning");
     setTimeout(() => {

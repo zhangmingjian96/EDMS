@@ -47,7 +47,19 @@
            $.ajax({
                url:"/api/v1/login/register",
                data:{password,user,username},
-               type:"POST"
+               type:"POST",
+           }).done((res)=>{
+               if(res.code===799){
+                   alert("账号已存在")
+               }else if(res.code===798){
+                   alert("用户名已存在")
+               }else{
+                   alert("注册成功，3S后跳转登录界面")
+                    setTimeout(()=>{
+                    $(".registers").css("display","none");
+                    $(".logins").css("display","block");
+                    },3000)
+               }
            })
         })
         $(".btn-login").on("click",function(e){

@@ -43,19 +43,23 @@ const docController=async (req,res,next)=>{
      next();
 }
 const authController=(req,res,next)=>{
-    console.log(req.session.user)
+  
     if(req.session.user){
     res.status={
         code:200,
         msg:"登陆成功"
     }
+    res.oldUser=[{
+        username:req.session.user.username
+    }];
     }else{
         res.status={
             code:207,
             msg:"请登录"
         } 
+        res.oldUser=[];
     }
-    res.oldUser=[];
+    
      next();
 }
 

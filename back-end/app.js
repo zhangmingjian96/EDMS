@@ -20,7 +20,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: { 
-    path: '/', httpOnly: true, secure: false, maxAge: 3000
+    path: '/', httpOnly: true, secure: false, maxAge: 300000000
   }
 }))
 app.use(logger('dev'));

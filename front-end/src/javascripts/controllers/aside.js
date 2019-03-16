@@ -1,4 +1,17 @@
 const addClick=()=>{
+    $(".exit-btn").on("click",function(){
+        $.ajax({
+            url:"/api/v1/login/exit",
+            data:{
+                exit:1,
+            },
+            success(res){
+                console.log(res)
+            }
+        })
+        window.location.href="login.html"
+       
+    })
     $(".treeview a").on("click",function(){
             console.log($(this).data("navname"),this);
         switch($(this).data("navname")){

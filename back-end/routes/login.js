@@ -8,5 +8,10 @@ const {register,login,code}=require("../middlewares/document");
 router.post("/register",userRegisterController,register);
 router.post("/login",docController,login);
 router.get("/auth",authController,login);
+router.get("/exit",(req,res,next)=>{
+    req.session.user=null;
+    console.log(req.session.user)
+    next();
+});
 router.get("/code",getCode,code);
 module.exports = router;
